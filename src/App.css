@@ -4,3 +4,14 @@
 .App > div {
   padding: 1rem
 }
+.error {
+  color: red;
+}
+.active-filter {
+  background-color: blueviolet;
+  color: white;
+}
+.is-done {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
