@@ -57,6 +57,7 @@ function App() {
         setTasks({...tasks})
     }
     const checkboxStateChange = (id: string, isDone: boolean, todolistId: string) => {
+        // get array of Todolist by ID
         let todolistTasks = tasks[todolistId];
         tasks[todolistId] = todolistTasks.map(t => t.id === id ? {...t, isDone} : t)
         setTasks({...tasks});
@@ -67,9 +68,31 @@ function App() {
         setTasks({...tasks});
     }
     const addTodolist = (title: string) => {
-        let todolist:TodolistType = {id: v1(), title: title, filter: 'all'}
-        setTodolists([todolist,...todolists])
-        setTasks({...tasks,[todolist.id]:[]})
+        let todolist: TodolistType = {id: v1(), title: title, filter: 'all'}
+        setTodolists([todolist, ...todolists])
+        setTasks({...tasks, [todolist.id]: []})
+    }
+    const changeTaskTitle = (id: string, newTitle: string, todolistId: string) => {
+        // get array of Todolist by ID
+        let todolistTasks = tasks[todolistId];
+        // find Task by ID
+        let task = todolistTasks.find(t => t.id === id)
+        if (task) {
+            //if found - change Task title
+            task.title = newTitle;
+            //renew Tasks state
+            setTasks({...tasks});
+        }
+    }
+    const changeTodolistTitle = (id: string, title: string) => {
+        //todolist search by ID
+        const todolist = todolists.find(tl => tl.id === id)
+        if (todolist) {
+            //if todolist found - change title
+            todolist.title = title
+            //renew Todolists state
+            setTodolists([...todolists])
+        }
     }
 
     return (
@@ -96,6 +119,8 @@ function App() {
                         addTask={addTask}
                         checkboxStateChange={checkboxStateChange}
                         removeTodolist={removeTodolist}
+                        changeTaskTitle={changeTaskTitle}
+                        changeTodolistTitle={changeTodolistTitle}
                         filter={tl.filter}/>
                 })
             }
