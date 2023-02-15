@@ -3,7 +3,7 @@ import {FilterValueType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
 import {Button, Checkbox, IconButton} from "@material-ui/core";
-import {Delete} from "@material-ui/icons";
+import {Delete, HighlightOff} from "@material-ui/icons";
 
 type TodolistPropsType = {
     id: string
@@ -45,7 +45,7 @@ export const Todolist = (props: TodolistPropsType) => {
             <Checkbox checked={t.isDone} onChange={onChangeStatus} color={"primary"}/>
             <EditableSpan value={t.title} onChange={onTitleChangeHandler}/>
             <IconButton onClick={onRemoveTaskHandler} aria-label="delete">
-                <Delete/>
+                <HighlightOff/>
             </IconButton>
         </div>
     })
